@@ -16,6 +16,7 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         stage.show();
         //ahmet deneme 1234
+        //özge deneme lololololo
     }
 
     public static void main(String[] args) {
