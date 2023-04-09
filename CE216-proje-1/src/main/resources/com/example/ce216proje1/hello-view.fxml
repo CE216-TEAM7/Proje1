@@ -6,7 +6,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -38,7 +38,7 @@
             <TextField alignment="TOP_CENTER" text="WELCOME TO OFFLINE DICTIONARY" />
             <HBox alignment="TOP_CENTER" prefHeight="31.0" prefWidth="600.0">
                <children>
-                  <TextArea prefHeight="94.0" prefWidth="423.0" />
+                  <TextField fx:id="myTextField" prefHeight="38.0" prefWidth="350.0" promptText="Enter a Word" />
                   <Button fx:id="myButton" mnemonicParsing="false" onAction="#displaySearchResults" prefHeight="38.0" prefWidth="52.0" text="Button" />
                </children>
             </HBox>
@@ -51,6 +51,10 @@
       </VBox>
    </top>
    <center>
-      <Label fx:id="myLabel" prefHeight="344.0" prefWidth="600.0" text="TRANSLATE" BorderPane.alignment="CENTER" />
+      <ScrollPane fx:id="myScrollpane" hbarPolicy="ALWAYS" pannable="true" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
+         <content>
+            <Label fx:id="myLabel" alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="246.0" prefWidth="586.0" text="TRANSLATE" />
+         </content>
+      </ScrollPane>
    </center>
 </BorderPane>

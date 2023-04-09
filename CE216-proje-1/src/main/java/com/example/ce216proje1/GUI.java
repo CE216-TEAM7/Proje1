@@ -3,12 +3,11 @@ package com.example.ce216proje1;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class GUI implements Initializable {
@@ -18,9 +17,16 @@ public class GUI implements Initializable {
     public Label myLabel;
     @FXML
     public Button myButton;
+    @FXML
+    private TextField myTextField;
+    @FXML
+    private ScrollPane myScrollpane;
 
     public String[]language={"Turkish","English","French","Italian","Swedish","German","Modern Greek"};
-    public String mainLanguage;
+    public static String mainLanguage;
+    public String searchWord;
+    public static Graph graph;
+    public static Dictionary dictionary;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -32,14 +38,58 @@ public class GUI implements Initializable {
         this.mainLanguage = mainLanguage;
         return mainLanguage;
     }
+    public String getWord()
+    {
+        searchWord=myTextField.getText();
+        return searchWord;
+    }
 
     public static void displayManual() {
 
     }
 
     public void displaySearchResults(ActionEvent event) {
-        myLabel.setText(getLanguage());
+        if (getLanguage().equals("English"))
+        {
+            System.out.println(Dictionary.graph.getTranslations(getWord(),getLanguage(),"Turkish"));
+            List<String> translationstr = Dictionary.graph.getTranslations(getWord(),getLanguage(),"Turkish");
+            List<String> translationsger = Dictionary.graph.getTranslations(getWord(),getLanguage(),"German");
+            List<String> translationsmd = Dictionary.graph.getTranslations(getWord(),getLanguage(),"Modern Greek");
+            List<String> translationssw = Dictionary.graph.getTranslations(getWord(),getLanguage(),"Swedish");
+            List<String> translationsfr = Dictionary.graph.getTranslations(getWord(),getLanguage(),"French");
+            List<String> translationsita = Dictionary.graph.getTranslations(getWord(),getLanguage(),"Italian");
+            StringBuilder sb = new StringBuilder();
 
+            sb.append("---Turkish---").append("\n");
+            for (String translation : translationstr) {
+                sb.append(translation).append("\n"); // Add each translation to the StringBuilder with a line break
+            }
+            sb.append("---German---").append("\n");
+            for (String translation : translationsger) {
+                sb.append(translation).append("\n"); // Add each translation to the StringBuilder with a line break
+            }
+            sb.append("---Modern Greek---").append("\n");
+            for (String translation : translationsmd) {
+                sb.append(translation).append("\n"); // Add each translation to the StringBuilder with a line break
+            }
+            sb.append("---Swedish---").append("\n");
+            for (String translation : translationssw) {
+                sb.append(translation).append("\n"); // Add each translation to the StringBuilder with a line break
+            }
+            sb.append("---French---").append("\n");
+            for (String translation : translationsfr) {
+                sb.append(translation).append("\n"); // Add each translation to the StringBuilder with a line break
+            }
+            sb.append("---Italian---").append("\n");
+            for (String translation : translationsita) {
+                sb.append(translation).append("\n"); // Add each translation to the StringBuilder with a line break
+            }
+            myScrollpane.setContent(myLabel);
+            myScrollpane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+            myScrollpane.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+            System.out.println(sb.toString());
+            myLabel.setText(sb.toString());
+        }
     }
 
     public static void displayAddWordForm() {
