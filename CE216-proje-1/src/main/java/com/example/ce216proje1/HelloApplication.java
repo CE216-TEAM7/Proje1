@@ -384,6 +384,46 @@ public class HelloApplication extends Application {
             e.printStackTrace();
         }
 
+        //FRA-ITA
+        try {
+            File file = new File("src/fra-ita.dict");
+            Scanner scanner = new Scanner(file);
+            String word = "";
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (line.endsWith(">")) {
+                    if (!word.isEmpty()) {
+                        String[] parts = line.split("/");
+                        word = parts[0].trim();
+                        String[] frenchWords = parts[1].split(",");
+                        ArrayList<String> translation = new ArrayList<>();
+                        for (String frenchWord : frenchWords) {
+                            translation.add(frenchWord.trim());
+                        }
+                        graph.addWord(word, "French", "Italian", translation);
+                    } else {
+                        String[] parts = line.split("/");
+                        word = parts[0].trim();
+                    }
+                } else {
+                    String[] parts = line.split("\\s+");
+                    StringBuilder italianWord = new StringBuilder();
+                    for (int i = parts.length - 1; i >= 0; i--) {
+                        italianWord.insert(0, parts[i] + " ");
+                    }
+                    ArrayList<String> translation = new ArrayList<>();
+                    translation.add(italianWord.toString().trim());
+                    graph.addWord(word, "French", "Italian", translation);
+                    word = "";
+                }
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(graph.getTranslations("Ain", "French", "Italian"));
+
         System.out.println(graph.getTranslations("Basse-Bavière", "French", "Swedish"));
 
 
