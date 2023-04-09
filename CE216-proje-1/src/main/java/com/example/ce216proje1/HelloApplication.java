@@ -933,6 +933,146 @@ public class HelloApplication extends Application {
         System.out.println(graph.getTranslations("Belle au bois dormant", "French", "Modern Greek"));
 
 
+        //SWE TO GER
+
+        try {
+            Scanner scanner = new Scanner(new File("CE216-proje-1/src/Dictionary/swe-deu.dict")); // Open the text file for reading
+            String word = "";
+            ArrayList<String> translation = new ArrayList<>();
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+
+                if (line.endsWith(">")) { //Swedish word - German
+                    if (!word.isEmpty()) {
+                        // If word is not empty, add the previous word and translation to the graph
+
+                        graph.addWord(word, "Swedish", "German", translation);
+                        word = "";
+                        translation = new ArrayList<>();
+                    }
+                    String[] parts = line.split("/");
+                    word = parts[0].trim();
+                } else {
+                    String[] parts = line.split("\s");
+                    StringBuilder germanWord = new StringBuilder();
+                    for (int i = parts.length - 1; i >= 0; i--) {
+
+                        germanWord.insert(0, parts[i] + " ");
+                    }
+                    translation.add(germanWord.toString().trim());
+                }
+
+
+            }
+            if (!word.isEmpty()) {
+                // Add the last word and translation to the graph after reading the file
+                graph.addWord(word, "Swedish", "German", translation);
+            }
+
+            scanner.close(); // Close the scanner after reading the file
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(graph.getTranslations("Blod är tjockare än vatten.", "Swedish", "German"));
+
+            //SWE TO FRENCH
+
+         try {
+            Scanner scanner = new Scanner(new File("CE216-proje-1/src/Dictionary/swe-fra.dict")); // Open the text file for reading
+            String word = "";
+            ArrayList<String> translation = new ArrayList<>();
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+
+                if (line.endsWith(">")) { //French word - Swedish
+                    if (!word.isEmpty()) {
+                        // If word is not empty, add the previous word and translation to the graph
+
+                        graph.addWord(word, "Swedish", "French", translation);
+                        word = "";
+                        translation = new ArrayList<>();
+                    }
+                    String[] parts = line.split("/");
+                    word = parts[0].trim();
+                } else {
+                    String[] parts = line.split("\s");
+                    StringBuilder frenchWord = new StringBuilder();
+                    for (int i = parts.length - 1; i >= 0; i--) {
+
+                        frenchWord.insert(0, parts[i] + " ");
+                    }
+                    translation.add(frenchWord.toString().trim());
+                }
+
+
+            }
+            if (!word.isEmpty()) {
+                // Add the last word and translation to the graph after reading the file
+                graph.addWord(word, "Swedish", "French", translation);
+            }
+
+            scanner.close(); // Close the scanner after reading the file
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(graph.getTranslations("Köln", "Swedish", "French"));
+
+
+        // SWE TO MODERN GREEK
+
+
+
+        try {
+            Scanner scanner = new Scanner(new File("CE216-proje-1/src/Dictionary/swe-fra.dict")); // Open the text file for reading
+            String word = "";
+            ArrayList<String> translation = new ArrayList<>();
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+
+                if (line.endsWith(">")) { //French word - Swedish
+                    if (!word.isEmpty()) {
+                        // If word is not empty, add the previous word and translation to the graph
+
+                        graph.addWord(word, "Swedish", "Modern Greek", translation);
+                        word = "";
+                        translation = new ArrayList<>();
+                    }
+                    String[] parts = line.split("/");
+                    word = parts[0].trim();
+                } else {
+                    String[] parts = line.split("\s");
+                    StringBuilder frenchWord = new StringBuilder();
+                    for (int i = parts.length - 1; i >= 0; i--) {
+
+                        frenchWord.insert(0, parts[i] + " ");
+                    }
+                    translation.add(frenchWord.toString().trim());
+                }
+
+
+            }
+            if (!word.isEmpty()) {
+                // Add the last word and translation to the graph after reading the file
+                graph.addWord(word, "Swedish", "Modern Greek", translation);
+            }
+
+            scanner.close(); // Close the scanner after reading the file
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(graph.getTranslations("Ett", "Swedish", "Modern Greek"));
+
+
+
+
+
+
 
 
 
