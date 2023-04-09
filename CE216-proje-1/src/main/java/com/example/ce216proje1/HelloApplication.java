@@ -341,6 +341,53 @@ public class HelloApplication extends Application {
         }
         System.out.println(graph.getTranslations("eins", "German", "Italian"));
 
+        //FRA-SWE
+        String pathName = "C:\\Users\\ASUS\\IdeaProjects\\ProjectTest3\\src\\fra-swe.dict";
+
+        try {
+            Scanner scanner = new Scanner(new File(pathName)); // Open the text file for reading
+            String word = "";
+            ArrayList<String> translation = new ArrayList<>();
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+
+                if (line.endsWith(">")) { //French word - Swedish
+                    if (!word.isEmpty()) {
+                        // If word is not empty, add the previous word and translation to the graph
+
+                        graph.addWord(word, "French", "Swedish", translation);
+                        word = "";
+                        translation = new ArrayList<>();
+                    }
+                    String[] parts = line.split("/");
+                    word = parts[0].trim();
+                } else {
+                    String[] parts = line.split("\s");
+                    StringBuilder frenchWord = new StringBuilder();
+                    for (int i = parts.length - 1; i >= 0; i--) {
+
+                        frenchWord.insert(0, parts[i] + " ");
+                    }
+                    translation.add(frenchWord.toString().trim());
+                }
+
+
+            }
+            if (!word.isEmpty()) {
+                // Add the last word and translation to the graph after reading the file
+                graph.addWord(word, "French", "Swedish", translation);
+            }
+
+            scanner.close(); // Close the scanner after reading the file
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(graph.getTranslations("Basse-Bavière", "French", "Swedish"));
+
+
+
         stage.setScene(scene);
         stage.show();
 
