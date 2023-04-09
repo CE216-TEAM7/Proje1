@@ -19,6 +19,8 @@ public class HelloApplication extends Application {
         Dictionary dictionary = new Dictionary();
         stage.setScene(scene);
         dictionary.readDictFile();
+        stage.setMinWidth(400);
+        stage.setMinHeight(400);
         stage.show();
 
 
