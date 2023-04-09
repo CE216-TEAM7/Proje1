@@ -257,7 +257,7 @@ public class HelloApplication extends Application {
         System.out.println(graph.getTranslations("Άδης", "Modern Greek", "English"));
         //ELL-FRA
         try {
-            Scanner scanner = new Scanner(new File("CE216-proje-1/src/Dictionary/eng-ell.dict")); // Open the text file for reading
+            Scanner scanner = new Scanner(new File("CE216-proje-1/src/Dictionary/ell-fra.dict")); // Open the text file for reading
             String word = "";
             ArrayList<String> translation = new ArrayList<>();
 
@@ -301,7 +301,7 @@ public class HelloApplication extends Application {
 
 
 
-//FRA-TUR
+        //FRA-TUR
         try {
             Scanner scanner = new Scanner(new File("CE216-proje-1/src/Dictionary/fra-tur.dict")); // Open the text file for reading
             String word = "";
@@ -458,6 +458,7 @@ public class HelloApplication extends Application {
             e.printStackTrace();
         }
         System.out.println(graph.getTranslations("Amburgo", "Italian", "German"));
+
         //ITA-TUR
         try {
             File file = new File("CE216-proje-1/src/Dictionary/ita-tur.dict");
@@ -575,10 +576,6 @@ public class HelloApplication extends Application {
         }
 
         System.out.println(graph.getTranslations("intimidire", "Italian", "Modern Greek"));
-
-
-
-
 
 
         //GER-ITA
@@ -833,7 +830,89 @@ public class HelloApplication extends Application {
         }
         System.out.println(graph.getTranslations("Traum", "German", "Turkish"));
 
+        //TUR-GER
+        try {
+            Scanner scanner = new Scanner(new File("CE216-proje-1/src/Dictionary/tur-deu.dict")); // Open the text file for reading
+            String word = "";
+            ArrayList<String> translation = new ArrayList<>();
 
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+
+                if (line.endsWith("/")) { //German word
+                    if (!word.isEmpty()) {
+                        // If word is not empty, add the previous word and translation to the graph
+
+                        graph.addWord(word, "Turkish", "German", translation);
+                        word = "";
+                        translation = new ArrayList<>();
+                    }
+                    String[] parts = line.split("/");
+                    word = parts[0].trim();
+                } else {
+                    String[] parts = line.split("\s");
+                    StringBuilder germanWord = new StringBuilder();
+                    for (int i = parts.length - 1; i >= 0; i--) {
+
+                        germanWord.insert(0, parts[i] + " ");
+                    }
+                    translation.add(germanWord.toString().trim());
+                }
+
+
+            }
+            if (!word.isEmpty()) {
+                // Add the last word and translation to the graph after reading the file
+                graph.addWord(word, "Turkish", "German", translation);
+            }
+
+            scanner.close(); // Close the scanner after reading the file
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        System.out.println(graph.getTranslations("deve", "Turkish", "German"));
+
+        //TUR-ENG
+        try {
+            Scanner scanner = new Scanner(new File("CE216-proje-1/src/Dictionary/tur-eng.dict")); // Open the text file for reading
+            String word = "";
+            ArrayList<String> translation = new ArrayList<>();
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+
+                if (line.endsWith("/")) { //German word
+                    if (!word.isEmpty()) {
+                        // If word is not empty, add the previous word and translation to the graph
+
+                        graph.addWord(word, "Turkish", "English", translation);
+                        word = "";
+                        translation = new ArrayList<>();
+                    }
+                    String[] parts = line.split("/");
+                    word = parts[0].trim();
+                } else {
+                    String[] parts = line.split("\s");
+                    StringBuilder englishWord = new StringBuilder();
+                    for (int i = parts.length - 1; i >= 0; i--) {
+
+                        englishWord.insert(0, parts[i] + " ");
+                    }
+                    translation.add(englishWord.toString().trim());
+                }
+
+
+            }
+            if (!word.isEmpty()) {
+                // Add the last word and translation to the graph after reading the file
+                graph.addWord(word, "Turkish", "English", translation);
+            }
+
+            scanner.close(); // Close the scanner after reading the file
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        System.out.println(graph.getTranslations("amatör", "Turkish", "English"));
 
         //FRA-SWE
         String pathName = "CE216-proje-1/src/Dictionary/fra-swe.dict";
