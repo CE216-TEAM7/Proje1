@@ -378,6 +378,131 @@ public class HelloApplication extends Application {
 
         System.out.println(graph.getTranslations("Amburgo", "Italian", "German"));
 
+        //ITA-TUR
+        try {
+            File file = new File("CE216-proje-1/src/Dictionary/ita-tur.dict");
+            Scanner scanner = new Scanner(file);
+            String word = "";
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (line.endsWith(">")) {
+                    if (!word.isEmpty()) {
+                        String[] parts = line.split("/");
+                        word = parts[0].trim();
+                        String[] italianWords = parts[1].split(",");
+                        ArrayList<String> translation = new ArrayList<>();
+                        for (String italianWord : italianWords) {
+                            translation.add(italianWord.trim());
+                        }
+                        graph.addWord(word, "Italian", "Turkish", translation);
+                    } else {
+                        String[] parts = line.split("/");
+                        word = parts[0].trim();
+                    }
+                } else {
+                    String[] parts = line.split("\\s+");
+                    StringBuilder turkishWord = new StringBuilder();
+                    for (int i = parts.length - 1; i >= 0; i--) {
+                        turkishWord.insert(0, parts[i] + " ");
+                    }
+                    ArrayList<String> translation = new ArrayList<>();
+                    translation.add(turkishWord.toString().trim());
+                    graph.addWord(word, "Italian", "Turkish", translation);
+                    word = "";
+                }
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(graph.getTranslations("entusiasmare", "Italian", "Turkish"));
+
+        //ITA-SWE
+        try {
+            File file = new File("CE216-proje-1/src/Dictionary/ita-swe.dict");
+            Scanner scanner = new Scanner(file);
+            String word = "";
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (line.endsWith(">")) {
+                    if (!word.isEmpty()) {
+                        String[] parts = line.split("/");
+                        word = parts[0].trim();
+                        String[] italianWords = parts[1].split(",");
+                        ArrayList<String> translation = new ArrayList<>();
+                        for (String italianWord : italianWords) {
+                            translation.add(italianWord.trim());
+                        }
+                        graph.addWord(word, "Italian", "Swedish", translation);
+                    } else {
+                        String[] parts = line.split("/");
+                        word = parts[0].trim();
+                    }
+                } else {
+                    String[] parts = line.split("\\s+");
+                    StringBuilder swedishWord = new StringBuilder();
+                    for (int i = parts.length - 1; i >= 0; i--) {
+                        swedishWord.insert(0, parts[i] + " ");
+                    }
+                    ArrayList<String> translation = new ArrayList<>();
+                    translation.add(swedishWord.toString().trim());
+                    graph.addWord(word, "Italian", "Swedish", translation);
+                    word = "";
+                }
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(graph.getTranslations("intimidire", "Italian", "Swedish"));
+
+        //ITA-ELL
+        try {
+            File file = new File("CE216-proje-1/src/Dictionary/ita-ell.dict");
+            Scanner scanner = new Scanner(file);
+            String word = "";
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (line.endsWith(">")) {
+                    if (!word.isEmpty()) {
+                        String[] parts = line.split("/");
+                        word = parts[0].trim();
+                        String[] italianWords = parts[1].split(",");
+                        ArrayList<String> translation = new ArrayList<>();
+                        for (String italianWord : italianWords) {
+                            translation.add(italianWord.trim());
+                        }
+                        graph.addWord(word, "Italian", "Modern Greek", translation);
+                    } else {
+                        String[] parts = line.split("/");
+                        word = parts[0].trim();
+                    }
+                } else {
+                    String[] parts = line.split("\\s+");
+                    StringBuilder modernGreekWord = new StringBuilder();
+                    for (int i = parts.length - 1; i >= 0; i--) {
+                        modernGreekWord.insert(0, parts[i] + " ");
+                    }
+                    ArrayList<String> translation = new ArrayList<>();
+                    translation.add(modernGreekWord.toString().trim());
+                    graph.addWord(word, "Italian", "Modern Greek", translation);
+                    word = "";
+                }
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(graph.getTranslations("intimidire", "Italian", "Modern Greek"));
+
+
+
+
+
+
         //GER-ITA
         try {
             Scanner scanner = new Scanner(new File("CE216-proje-1/src/Dictionary/deu-ita.dict")); // Open the text file for reading
@@ -588,7 +713,7 @@ public class HelloApplication extends Application {
         }
         System.out.println(graph.getTranslations("Aalpässe", "German", "English"));
 
-        //GER-ENG
+        //GER-TUR
         try {
             Scanner scanner = new Scanner(new File("CE216-proje-1/src/Dictionary/deu-tur.dict")); // Open the text file for reading
             String word = "";
