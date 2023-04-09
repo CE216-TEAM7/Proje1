@@ -50,6 +50,47 @@ public class HelloApplication extends Application {
         //ENG-TR VOCABULARY TEST
         System.out.println(graph.getTranslations("death","English","Turkish"));
         System.out.println(graph.getTranslations("öIüm","Turkish","English"));
+        
+        //ENG-ITA
+        try {
+            File file = new File("CE216-proje-1/src/Dictionary/eng-ita.dict");
+            Scanner scanner = new Scanner(file);
+            String word = "";
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (line.endsWith("/")) {
+                    if (!word.isEmpty()) {
+                        String[] parts = line.split("/");
+                        word = parts[0].trim();
+                        String[] engWords = parts[1].split(",");
+                        ArrayList<String> translation = new ArrayList<>();
+                        for (String engWord : engWords) {
+                            translation.add(engWord.trim());
+                        }
+                        graph.addWord(word, "English", "Italian", translation);
+                    } else {
+                        String[] parts = line.split("/");
+                        word = parts[0].trim();
+                    }
+                } else {
+                    String[] parts = line.split("\\s+");
+                    StringBuilder italianWord = new StringBuilder();
+                    for (int i = parts.length - 1; i >= 0; i--) {
+                        italianWord.insert(0, parts[i] + " ");
+                    }
+                    ArrayList<String> translation = new ArrayList<>();
+                    translation.add(italianWord.toString().trim());
+                    graph.addWord(word, "English", "Italian", translation);
+                    word = "";
+                }
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        //ENG-ITA Test
+        System.out.println(graph.getTranslations("abandonment", "English", "Italian"));
 
         //ENG-FRA
         try {
