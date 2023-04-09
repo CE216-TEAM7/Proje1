@@ -313,20 +313,20 @@ public class HelloApplication extends Application {
                         for (String italianWord : italianWords) {
                             translation.add(italianWord.trim());
                         }
-                        graph.addWord(word, "Italian", "Deutsch", translation);
+                        graph.addWord(word, "Italian", "German", translation);
                     } else {
                         String[] parts = line.split("/");
                         word = parts[0].trim();
                     }
                 } else {
                     String[] parts = line.split("\\s+");
-                    StringBuilder deutschWord = new StringBuilder();
+                    StringBuilder germanWord = new StringBuilder();
                     for (int i = parts.length - 1; i >= 0; i--) {
-                        deutschWord.insert(0, parts[i] + " ");
+                        germanWord.insert(0, parts[i] + " ");
                     }
                     ArrayList<String> translation = new ArrayList<>();
-                    translation.add(deutschWord.toString().trim());
-                    graph.addWord(word, "Italian", "Deutsch", translation);
+                    translation.add(germanWord.toString().trim());
+                    graph.addWord(word, "Italian", "German", translation);
                     word = "";
                 }
             }
@@ -335,7 +335,7 @@ public class HelloApplication extends Application {
             e.printStackTrace();
         }
 
-        System.out.println(graph.getTranslations("Amburgo", "Italian", "Deutsch"));
+        System.out.println(graph.getTranslations("Amburgo", "Italian", "German"));
 
         //GER-ITA
         try {

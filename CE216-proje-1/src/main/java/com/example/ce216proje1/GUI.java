@@ -1,7 +1,17 @@
 package com.example.ce216proje1;
 
-public class GUI {
-    //deneme guı
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class GUI implements Initializable {
+    @FXML
+    public ChoiceBox<String> myChoiceBox;
+
+    public String[]language={"Turkish","English","French","Italian","Swedish","German","Modern Greek"};
 
     public static void displayManual() {
 
@@ -29,5 +39,10 @@ public class GUI {
 
     public static void createGUI() {
 
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        myChoiceBox.getItems().addAll(language);
     }
 }
