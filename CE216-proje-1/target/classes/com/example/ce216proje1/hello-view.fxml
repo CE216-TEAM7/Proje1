@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce216proje1.GUI">
    <top>
       <VBox prefHeight="144.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -43,8 +43,7 @@
             </HBox>
             <HBox prefHeight="57.0" prefWidth="600.0">
                <children>
-                  <ChoiceBox prefWidth="150.0" />
-                  <ChoiceBox prefWidth="150.0" />
+                  <ChoiceBox fx:id="myChoiceBox" prefWidth="150.0" />
                </children>
             </HBox>
          </children>
