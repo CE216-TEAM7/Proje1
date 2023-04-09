@@ -1218,7 +1218,7 @@ public class HelloApplication extends Application {
             e.printStackTrace();
         }
 
-        System.out.println(graph.getTranslations("Ett", "Swedish", "Modern Greek"));
+        System.out.println(graph.getTranslations("Köln", "Swedish", "Modern Greek"));
 
 
 
@@ -1306,7 +1306,7 @@ public class HelloApplication extends Application {
             e.printStackTrace();
         }
 
-        System.out.println(graph.getTranslations("Tyst", "Swedish", "Turkish"));
+        System.out.println(graph.getTranslations("tyst", "Swedish", "Turkish"));
 
 
         // SWEDISH TO ITALIAN
