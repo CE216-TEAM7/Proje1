@@ -677,6 +677,55 @@ public class HelloApplication extends Application {
         System.out.println(graph.getTranslations("Ain", "French", "Italian"));
 
 
+       // French to German :
+
+
+        try {
+            Scanner scanner = new Scanner(new File("CE216-proje-1/src/Dictionary/fra-deu.dict")); // Open the text file for reading
+            String word = "";
+            ArrayList<String> translation = new ArrayList<>();
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+
+                if (line.endsWith(">")) { //French word - German
+                    if (!word.isEmpty()) {
+                        // If word is not empty, add the previous word and translation to the graph
+
+                        graph.addWord(word, "French", "German", translation);
+                        word = "";
+                        translation = new ArrayList<>();
+                    }
+                    String[] parts = line.split("/");
+                    word = parts[0].trim();
+                } else {
+                    String[] parts = line.split("\s");
+                    StringBuilder germanWord = new StringBuilder();
+                    for (int i = parts.length - 1; i >= 0; i--) {
+
+                        germanWord.insert(0, parts[i] + " ");
+                    }
+                    translation.add(germanWord.toString().trim());
+                }
+
+
+            }
+            if (!word.isEmpty()) {
+                // Add the last word and translation to the graph after reading the file
+                graph.addWord(word, "French", "German", translation);
+            }
+
+            scanner.close(); // Close the scanner after reading the file
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(graph.getTranslations("chignole", "French", "German"));
+
+
+
+
+
 
         stage.setScene(scene);
         stage.show();
