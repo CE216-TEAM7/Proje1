@@ -1126,6 +1126,9 @@ public class HelloApplication extends Application {
 
         System.out.println(graph.getTranslations("Blod är tjockare än vatten.", "Swedish", "German"));
 
+
+
+
             //SWE TO FRENCH
 
          try {
@@ -1171,12 +1174,12 @@ public class HelloApplication extends Application {
         System.out.println(graph.getTranslations("Köln", "Swedish", "French"));
 
 
-        // SWE TO MODERN GREEK
 
 
+         // SWE TO MODERN GREEK
 
         try {
-            Scanner scanner = new Scanner(new File("CE216-proje-1/src/Dictionary/swe-fra.dict")); // Open the text file for reading
+            Scanner scanner = new Scanner(new File("CE216-proje-1/src/Dictionary/swe-ell.dict")); // Open the text file for reading
             String word = "";
             ArrayList<String> translation = new ArrayList<>();
 
@@ -1216,6 +1219,8 @@ public class HelloApplication extends Application {
         }
 
         System.out.println(graph.getTranslations("Ett", "Swedish", "Modern Greek"));
+
+
 
         // SWE TO ENGLISH
 
@@ -1318,7 +1323,7 @@ public class HelloApplication extends Application {
                     if (!word.isEmpty()) {
                         // If word is not empty, add the previous word and translation to the graph
 
-                        graph.addWord(word, "Swedish", "French", translation);
+                        graph.addWord(word, "Swedish", "Italian", translation);
                         word = "";
                         translation = new ArrayList<>();
                     }
