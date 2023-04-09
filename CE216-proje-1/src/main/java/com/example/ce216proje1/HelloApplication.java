@@ -132,7 +132,6 @@ public class HelloApplication extends Application {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        // NUMBER PROBLEM
         //ENG-FRA VOCABULARY TEST
         System.out.println(graph.getTranslations("drug", "English", "French"));
         System.out.println(graph.getTranslations("1. remède","French","English"));
@@ -177,7 +176,6 @@ public class HelloApplication extends Application {
         //ELL-ITA VOCABULARY TEST
         System.out.println(graph.getTranslations("Αράλη", "Modern Greek", "Italian"));
         System.out.println(graph.getTranslations("Aral","Italian","Modern Greek"));
-
         //ELL-SWE
         try {
             File file = new File("CE216-proje-1/src/Dictionary/ell-swe.dict");
@@ -215,10 +213,95 @@ public class HelloApplication extends Application {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
         System.out.println(graph.getTranslations("Όφις", "Modern Greek", "Swedish"));
+        //ELL-ENG
+        try {
+            Scanner scanner = new Scanner(new File("CE216-proje-1/src/Dictionary/ell-eng.dict")); // Open the text file for reading
+            String word = "";
+            ArrayList<String> translation = new ArrayList<>();
 
-        //FRA-TUR
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+
+                if (line.endsWith(">")) { //Modern Greek word - English
+                    if (!word.isEmpty()) {
+                        // If word is not empty, add the previous word and translation to the graph
+
+                        graph.addWord(word, "Modern Greek", "English", translation);
+                        word = "";
+                        translation = new ArrayList<>();
+                    }
+                    String[] parts = line.split("/");
+                    word = parts[0].trim();
+                } else {
+                    String[] parts = line.split("\s");
+                    StringBuilder englishWord = new StringBuilder();
+                    for (int i = parts.length - 1; i >= 0; i--) {
+
+                        englishWord.insert(0, parts[i] + " ");
+                    }
+                    translation.add(englishWord.toString().trim());
+                }
+
+
+            }
+            if (!word.isEmpty()) {
+                // Add the last word and translation to the graph after reading the file
+                graph.addWord(word, "Modern Greek", "English", translation);
+            }
+
+            scanner.close(); // Close the scanner after reading the file
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        System.out.println(graph.getTranslations("Άδης", "Modern Greek", "English"));
+        //ELL-FRA
+        try {
+            Scanner scanner = new Scanner(new File("CE216-proje-1/src/Dictionary/eng-ell.dict")); // Open the text file for reading
+            String word = "";
+            ArrayList<String> translation = new ArrayList<>();
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+
+                if (line.endsWith(">")) { //French word - Modern Greek
+                    if (!word.isEmpty()) {
+                        // If word is not empty, add the previous word and translation to the graph
+
+                        graph.addWord(word, "Modern Greek", "French", translation);
+                        word = "";
+                        translation = new ArrayList<>();
+                    }
+                    String[] parts = line.split("/");
+                    word = parts[0].trim();
+                } else {
+                    String[] parts = line.split("\s");
+                    StringBuilder frenchWord = new StringBuilder();
+                    for (int i = parts.length - 1; i >= 0; i--) {
+
+                        frenchWord.insert(0, parts[i] + " ");
+                    }
+                    translation.add(frenchWord.toString().trim());
+                }
+
+
+            }
+            if (!word.isEmpty()) {
+                // Add the last word and translation to the graph after reading the file
+                graph.addWord(word, "Modern Greek", "French", translation);
+            }
+
+            scanner.close(); // Close the scanner after reading the file
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(graph.getTranslations("Μπουρκίνα Φάσο", "Modern Greek", "French"));
+
+
+
+
+//FRA-TUR
         try {
             Scanner scanner = new Scanner(new File("CE216-proje-1/src/Dictionary/fra-tur.dict")); // Open the text file for reading
             String word = "";
@@ -296,7 +379,6 @@ public class HelloApplication extends Application {
             e.printStackTrace();
         }
         System.out.println(graph.getTranslations("vert", "French", "English"));
-
         //ITA-ENG
         try {
             Scanner scanner = new Scanner(new File("CE216-proje-1/src/Dictionary/ita-eng.dict")); // Open the text file for reading
@@ -375,9 +457,7 @@ public class HelloApplication extends Application {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
         System.out.println(graph.getTranslations("Amburgo", "Italian", "German"));
-
         //ITA-TUR
         try {
             File file = new File("CE216-proje-1/src/Dictionary/ita-tur.dict");
@@ -415,9 +495,7 @@ public class HelloApplication extends Application {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
         System.out.println(graph.getTranslations("entusiasmare", "Italian", "Turkish"));
-
         //ITA-SWE
         try {
             File file = new File("CE216-proje-1/src/Dictionary/ita-swe.dict");
@@ -759,7 +837,6 @@ public class HelloApplication extends Application {
 
         //FRA-SWE
         String pathName = "CE216-proje-1/src/Dictionary/fra-swe.dict";
-
         try {
             Scanner scanner = new Scanner(new File(pathName)); // Open the text file for reading
             String word = "";
@@ -799,9 +876,7 @@ public class HelloApplication extends Application {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
         System.out.println(graph.getTranslations("Basse-Bavière", "French", "Swedish"));
-
         //FRA-ITA
         try {
             File file = new File("CE216-proje-1/src/Dictionary/fra-ita.dict");
@@ -839,13 +914,8 @@ public class HelloApplication extends Application {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
         System.out.println(graph.getTranslations("Ain", "French", "Italian"));
-
-
        // French to German :
-
-
         try {
             Scanner scanner = new Scanner(new File("CE216-proje-1/src/Dictionary/fra-deu.dict")); // Open the text file for reading
             String word = "";
@@ -885,10 +955,7 @@ public class HelloApplication extends Application {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
         System.out.println(graph.getTranslations("chignole", "French", "German"));
-
-
         //FRENCH TO MODERN GREEK
         try {
             Scanner scanner = new Scanner(new File("CE216-proje-1/src/Dictionary/fra-ell.dict")); // Open the text file for reading
