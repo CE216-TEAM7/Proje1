@@ -254,7 +254,6 @@ public class HelloApplication extends Application {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
         System.out.println(graph.getTranslations("vert", "French", "English"));
 
         //ITA-ENG
@@ -298,6 +297,45 @@ public class HelloApplication extends Application {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        //ITA-DEU
+        try {
+            File file = new File("CE216-proje-1/src/Dictionary/ita-deu.dict");
+            Scanner scanner = new Scanner(file);
+            String word = "";
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (line.endsWith("/")) {
+                    if (!word.isEmpty()) {
+                        String[] parts = line.split("/");
+                        word = parts[0].trim();
+                        String[] italianWords = parts[1].split(",");
+                        ArrayList<String> translation = new ArrayList<>();
+                        for (String italianWord : italianWords) {
+                            translation.add(italianWord.trim());
+                        }
+                        graph.addWord(word, "Italian", "Deutsch", translation);
+                    } else {
+                        String[] parts = line.split("/");
+                        word = parts[0].trim();
+                    }
+                } else {
+                    String[] parts = line.split("\\s+");
+                    StringBuilder deutschWord = new StringBuilder();
+                    for (int i = parts.length - 1; i >= 0; i--) {
+                        deutschWord.insert(0, parts[i] + " ");
+                    }
+                    ArrayList<String> translation = new ArrayList<>();
+                    translation.add(deutschWord.toString().trim());
+                    graph.addWord(word, "Italian", "Deutsch", translation);
+                    word = "";
+                }
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(graph.getTranslations("Amburgo", "Italian", "Deutsch"));
 
         //GER-ITA
         try {
