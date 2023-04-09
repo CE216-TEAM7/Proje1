@@ -342,7 +342,7 @@ public class HelloApplication extends Application {
         System.out.println(graph.getTranslations("eins", "German", "Italian"));
 
         //FRA-SWE
-        String pathName = "C:\\Users\\ASUS\\IdeaProjects\\ProjectTest3\\src\\fra-swe.dict";
+        String pathName = "CE216-proje-1/src/Dictionary/fra-swe.dict";
 
         try {
             Scanner scanner = new Scanner(new File(pathName)); // Open the text file for reading
