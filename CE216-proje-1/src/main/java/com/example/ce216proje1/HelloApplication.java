@@ -1035,6 +1035,8 @@ public class HelloApplication extends Application {
             e.printStackTrace();
         }
         System.out.println(graph.getTranslations("chignole", "French", "German"));
+
+
         //FRENCH TO MODERN GREEK
         try {
             Scanner scanner = new Scanner(new File("CE216-proje-1/src/Dictionary/fra-ell.dict")); // Open the text file for reading
@@ -1077,6 +1079,7 @@ public class HelloApplication extends Application {
         }
 
         System.out.println(graph.getTranslations("Belle au bois dormant", "French", "Modern Greek"));
+
 
 
         //SWE TO GER
@@ -1213,6 +1216,141 @@ public class HelloApplication extends Application {
         }
 
         System.out.println(graph.getTranslations("Ett", "Swedish", "Modern Greek"));
+
+        // SWE TO ENGLISH
+
+        try {
+            Scanner scanner = new Scanner(new File("CE216-proje-1/src/Dictionary/swe-eng.dict")); // Open the text file for reading
+            String word = "";
+            ArrayList<String> translation = new ArrayList<>();
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+
+                if (line.endsWith("/")) { //Swedish word - English
+                    if (!word.isEmpty()) {
+                        // If word is not empty, add the previous word and translation to the graph
+
+                        graph.addWord(word, "Swedish", "English", translation);
+                        word = "";
+                        translation = new ArrayList<>();
+                    }
+                    String[] parts = line.split("/");
+                    word = parts[0].trim();
+                } else {
+                    String[] parts = line.split("\s");
+                    StringBuilder englishWord = new StringBuilder();
+                    for (int i = parts.length - 1; i >= 0; i--) {
+
+                        englishWord.insert(0, parts[i] + " ");
+                    }
+                    translation.add(englishWord.toString().trim());
+                }
+
+
+            }
+            if (!word.isEmpty()) {
+                // Add the last word and translation to the graph after reading the file
+                graph.addWord(word, "Swedish", "English", translation);
+            }
+
+            scanner.close(); // Close the scanner after reading the file
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(graph.getTranslations("Sverige", "Swedish", "English"));
+
+
+        // SWEDISH TO TURKISH
+
+        try {
+            File file = new File("CE216-proje-1/src/Dictionary/swe-tur (2).dict");
+            Scanner scanner = new Scanner(file);
+            String word = "";
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (line.endsWith(">")) {
+                    if (!word.isEmpty()) {
+                        String[] parts = line.split("/");
+                        word = parts[0].trim();
+                        String[] swedWords = parts[1].split(",");
+                        ArrayList<String> translation = new ArrayList<>();
+                        for (String swedWord : swedWords) {
+                            translation.add(swedWord.trim());
+                        }
+                        graph.addWord(word, "Swedish", "Turkish", translation);
+                    } else {
+                        String[] parts = line.split("/");
+                        word = parts[0].trim();
+                    }
+                } else {
+                    String[] parts = line.split("\\s+");
+                    StringBuilder turkishWords = new StringBuilder();
+                    for (int i = parts.length - 1; i >= 0; i--) {
+                        turkishWords.insert(0, parts[i] + " ");
+                    }
+                    ArrayList<String> translation = new ArrayList<>();
+                    translation.add(turkishWords.toString().trim());
+                    graph.addWord(word, "Swedish", "Turkish", translation);
+                    word = "";
+                }
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(graph.getTranslations("Tyst", "Swedish", "Turkish"));
+
+
+        // SWEDISH TO ITALIAN
+
+        try {
+            Scanner scanner = new Scanner(new File("CE216-proje-1/src/Dictionary/swe-ita.dict")); // Open the text file for reading
+            String word = "";
+            ArrayList<String> translation = new ArrayList<>();
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+
+                if (line.endsWith(">")) { //French word - Swedish
+                    if (!word.isEmpty()) {
+                        // If word is not empty, add the previous word and translation to the graph
+
+                        graph.addWord(word, "Swedish", "French", translation);
+                        word = "";
+                        translation = new ArrayList<>();
+                    }
+                    String[] parts = line.split("/");
+                    word = parts[0].trim();
+                } else {
+                    String[] parts = line.split("\s");
+                    StringBuilder frenchWord = new StringBuilder();
+                    for (int i = parts.length - 1; i >= 0; i--) {
+
+                        frenchWord.insert(0, parts[i] + " ");
+                    }
+                    translation.add(frenchWord.toString().trim());
+                }
+
+
+            }
+            if (!word.isEmpty()) {
+                // Add the last word and translation to the graph after reading the file
+                graph.addWord(word, "Swedish", "Italian", translation);
+            }
+
+            scanner.close(); // Close the scanner after reading the file
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(graph.getTranslations("Köln", "Swedish", "Italian"));
+
+
+
+
 
 
 
