@@ -424,7 +424,7 @@ public class HelloApplication extends Application {
 
         //FRA-ITA
         try {
-            File file = new File("CE216-proje-1/src/Dictionary/fra-ita.dictsrc/fra-ita.dict");
+            File file = new File("CE216-proje-1/src/Dictionary/fra-ita.dict");
             Scanner scanner = new Scanner(file);
             String word = "";
             while (scanner.hasNextLine()) {
